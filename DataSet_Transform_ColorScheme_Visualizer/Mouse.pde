@@ -9,6 +9,12 @@ void mouseClicked() {
     renderDistance=renderDistance<<1;
   }
   renderDistance = constrain(renderDistance, 5, 1024);
+  
+  if (mouseButton==CENTER) {
+    saveFrame("/images/graph_" + month() + "_" + day() + "_" + imageCounter + ".png" );
+    imageCounter++;
+    delay(1000);
+  }
 }
 
 void mouseWheel(MouseEvent event) {

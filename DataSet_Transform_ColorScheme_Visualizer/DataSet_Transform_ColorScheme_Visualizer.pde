@@ -36,6 +36,8 @@ int renderDistance = 256;
 float rotateX=0;
 float rotateY=0;
 float rotateZ=0;
+int imageCounter=1;
+
 Pregen pregen;
 Coord coord = new Coord();
 long startTime = 0;

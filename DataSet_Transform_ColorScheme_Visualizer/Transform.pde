@@ -52,6 +52,17 @@ public class Deadzone15 implements Transform {
   }
 }
 
+public class xSquared implements Transform {
+  private Coord outputCoord = new Coord();
+
+  public Coord apply(Coord inputCoord) {
+    int xSign = constrain(inputCoord.getX(),-1,1);
+    int ySign = constrain(inputCoord.getY(),-1,1);
+    outputCoord.setXY(inputCoord.getX()*inputCoord.getX()*xSign,inputCoord.getY()*inputCoord.getY()*ySign);
+    return outputCoord;
+  }
+}
+
 public class Translate implements Transform {
   private Coord outputCoord = new Coord();
   private int Xtrans=0;

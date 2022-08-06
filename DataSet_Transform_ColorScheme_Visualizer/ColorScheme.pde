@@ -6,7 +6,7 @@ public interface ColorScheme {
 public class Gradient_Mag_Fade implements ColorScheme { // Shows a shift in final magnitude. where Red is a shrinking of magnitude, and purple is a stretching.
   public void change(Coord inputCoord, Coord outputCoord) {
     
-    outputCoord.HSBcolor = color(30-(inputCoord.getMag()-outputCoord.getMag())*3/2, 100, 100);
+    outputCoord.HSBcolor = color(125-outputCoord.getMag(), 100, 100);
     int valueX = 2*mouseX-width*zoom+(width/2+mouseX)*(zoom-1);
     int valueY = 2*mouseY-height*zoom+(height/2+mouseY)*(zoom-1);
     float dist1 = inputCoord.distanceFrom(valueX,valueY); // Need to offset mouse transform, so wierd maths.
