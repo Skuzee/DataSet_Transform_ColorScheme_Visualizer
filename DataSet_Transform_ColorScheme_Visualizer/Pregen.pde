@@ -1,3 +1,7 @@
+// List of pregens
+// Pregen_Template
+// 
+
 // "Pregen" assembled lists of Pregenerated transforms and visualizations ~~~~~~~~~~~~~~~~~~~~~
 public interface Pregen {
   void run(Coord inputCoord);
@@ -13,25 +17,6 @@ public class Pregen_Template extends Sequence implements Pregen {
     
     //this.addElement(null,                new Solid_Fade(color(0, 0, 100)), new PlotAsPoints(2));
     //this.addElement(new Translate(3,3),  new Gradient_Disp_Fade(),    new VectorField());
-    //this.addElement(new Translate(-3,3), new Solid_Fade(color(0, 100, 100)), new PlotAsPoints(2));
-  }
-  void run(Coord inputCoord) {
-    textSize(30);
-    text(title,-width/2,-height/2-25,100);
-    this.iterateDeep(inputCoord);
-  }
-}
-
-public class Pregen_xSquared extends Sequence implements Pregen { 
-  public String title = "Pregen Template: Title Here";
-  
-  Pregen_xSquared() {
-    dataSet = new SweepXY(1);
-    //dataSet = new SweepRadar_Angle();
-    //dataSet = new SweepRadar_Mag();
-    
-    //this.addElement(null,                new Solid_Fade(color(0, 0, 100)), new PlotAsPoints(2));
-    this.addElement(new xSquared(),  new Gradient_Mag_Fade(),    new VectorField());
     //this.addElement(new Translate(-3,3), new Solid_Fade(color(0, 100, 100)), new PlotAsPoints(2));
   }
   void run(Coord inputCoord) {
@@ -146,7 +131,7 @@ public class Pregen_InvertVC extends Sequence implements Pregen {
 
 // Types of Pregens ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 public static enum TypesOfPregens { 
- Pregen_xSquared, Pregen_MyScale, Pregen_WiiVCmap, Pregen_InvertVC, Pregen_MonotonicXYPlot, Pregen_NotchSnapping; // Pregen_Template
+  Pregen_MyScale, Pregen_WiiVCmap, Pregen_InvertVC, Pregen_MonotonicXYPlot, Pregen_NotchSnapping; // Pregen_Template
 
   private static TypesOfPregens[] vals = values();
 
@@ -176,11 +161,7 @@ void selectPregen() {
   
   //case Pregen_Template:
   //  pregen = new Pregen_NotchSnapping();
-  //  break; 
-  
-  case Pregen_xSquared:
-    pregen = new Pregen_xSquared();
-    break; 
+  //  break;  
   
   case Pregen_MyScale:
     pregen = new Pregen_MyScale();

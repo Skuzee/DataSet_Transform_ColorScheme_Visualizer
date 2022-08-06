@@ -1,9 +1,15 @@
+// List of Visualizers
+// PlotAsPoints - Plots the coordinate as a dot.
+// VectorField - Draws a line from inputCoord to outputCoord.
+// MonotonicXYPlot - Doesn't work. Is supposed to graph the change in an axis as an XY plot. To test if the monotonic.
+
+
 // Visualizer Interface & Definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 public interface Visualizer {
   public void display(Coord inputCoord, Coord outputCoord);
 }
 
-public class PlotAsPoints implements Visualizer { // DOTS
+public class PlotAsPoints implements Visualizer { // Plots the coordinate as a dot.~~~~~~~~~~~
   private int drawMultiplier = 1;
   
   PlotAsPoints() {
@@ -23,7 +29,7 @@ public class PlotAsPoints implements Visualizer { // DOTS
   }
 }
 
-public class VectorField implements Visualizer { // Draws a line from inputCoord to outputCoord
+public class VectorField implements Visualizer { // Draws a line from inputCoord to outputCoord.
   public void display(Coord inputCoord, Coord outputCoord) {
     if ((outputCoord.getX()!=0) && (outputCoord.getY()!=0) && outputCoord.isRendered) {
       pushStyle();
@@ -40,7 +46,7 @@ public class VectorField implements Visualizer { // Draws a line from inputCoord
 
 }
 
-public class MonotonicXYPlot implements Visualizer { // Draws a line from inputCoord to outputCoord
+public class MonotonicXYPlot implements Visualizer { // Doesn't work. Is supposed to graph the change in an axis as an XY plot. To test if the monotonic.
   Coord lastCoord = new Coord();
 
   public void display(Coord inputCoord, Coord outputCoord) {

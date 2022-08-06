@@ -4,6 +4,10 @@ and then it will colorize the coordinates by some COLORSCHEME and then plot / di
 The design is modular such that any transform and any visualizer can be used on any set of coordinate points, 
 and transforms/visualizers can be chained together.
 
+Draw calls pregen.run() which adds the transforms, colorschemes, and visualizers to an arraylist.
+It calls iterateDeep() which is a method of the Sequence class. It gets the next coord from the dataset and iterates
+through all the transforms, colorschemes, and visualizers in order.
+
 Extending the Sequence class is a "Pregen" a custom list of transforms/visualizer steps.
 Define a PREGEN and add the required elements, use NULL to skip transform, colorization, or visualization. 
 Add the name to TypesOfPregens enum and selectPregen functions. pregen.run(coord) is called to render an image. 

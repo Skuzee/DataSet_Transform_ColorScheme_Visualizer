@@ -1,9 +1,47 @@
+// List of Trasforms
+// xSquared - Squares each cooridnate, preserving sign.
+// Translate - Translates the cooridnate.
+// VCmap - Emulates the mapping that is applied by Nintendo Wii's Virtual Console.
+// Deadzone15 - Applies 15 unit deadzone. Used with VCMap
+// InvertVC - Applies a stretching/scaling and then applies a linear/triagular map as an inverse to VCmap.
+// MyScale -  A new way of scaling from a regular octogon to the n64s octogon.
+// NotchSnapping - Snaps the coordinate to a point if it is within a certain range.
+
+
 // Transforms Interface & Definitions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 public interface Transform {
   public Coord apply(Coord inputCoord);
 }
 
-public class VCmap implements Transform { // Subtraction
+public class xSquared implements Transform { // Squares each cooridnate, preserving sign. ~~~~
+  private Coord outputCoord = new Coord();
+
+  public Coord apply(Coord inputCoord) {
+    int xSign = constrain(inputCoord.getX(),-1,1);
+    int ySign = constrain(inputCoord.getY(),-1,1);
+    outputCoord.setXY(inputCoord.getX()*inputCoord.getX()*xSign,inputCoord.getY()*inputCoord.getY()*ySign);
+    return outputCoord;
+  }
+}
+
+public class Translate implements Transform { // Translates the cooridnate. ~~~~~~~~~~~~~~~~~~
+  private Coord outputCoord = new Coord();
+  private int Xtrans=0;
+  private int Ytrans=0;
+  
+  Translate(int Xtrans, int Ytrans) {
+    this.Xtrans  = Xtrans;
+    this.Ytrans = Ytrans;
+  }
+
+  public Coord apply(Coord inputCoord) {
+    outputCoord.setXY(inputCoord.getX()+Xtrans, inputCoord.getY()+Ytrans);
+
+    return outputCoord;
+  }
+}
+
+public class VCmap implements Transform { // VCmap Emulates the mapping that is applied by Nintendo Wii's Virtual Console. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   private Coord outputCoord = new Coord();
 
   public Coord apply(Coord inputCoord) {
@@ -32,7 +70,7 @@ public class VCmap implements Transform { // Subtraction
   }
 }
 
-public class Deadzone15 implements Transform {
+public class Deadzone15 implements Transform { // Applies 15 unit deadzone ~~~~~~~~~~~~~~~~~~~
   private Coord outputCoord = new Coord();
 
   public Coord apply(Coord inputCoord) {
@@ -51,36 +89,7 @@ public class Deadzone15 implements Transform {
     return outputCoord;
   }
 }
-
-public class xSquared implements Transform {
-  private Coord outputCoord = new Coord();
-
-  public Coord apply(Coord inputCoord) {
-    int xSign = constrain(inputCoord.getX(),-1,1);
-    int ySign = constrain(inputCoord.getY(),-1,1);
-    outputCoord.setXY(inputCoord.getX()*inputCoord.getX()*xSign,inputCoord.getY()*inputCoord.getY()*ySign);
-    return outputCoord;
-  }
-}
-
-public class Translate implements Transform {
-  private Coord outputCoord = new Coord();
-  private int Xtrans=0;
-  private int Ytrans=0;
-  
-  Translate(int Xtrans, int Ytrans) {
-    this.Xtrans  = Xtrans;
-    this.Ytrans = Ytrans;
-  }
-
-  public Coord apply(Coord inputCoord) {
-    outputCoord.setXY(inputCoord.getX()+Xtrans, inputCoord.getY()+Ytrans);
-
-    return outputCoord;
-  }
-}
-
-public class InvertVC implements Transform {
+public class InvertVC implements Transform { // InvertVC Applies a stretching/scaling and then applies a linear/triagular map as an inverse to VCmap.
   private Coord outputCoord = new Coord();
   private boolean x_positive = true;
   private boolean y_positive = true;
@@ -187,7 +196,7 @@ public class InvertVC implements Transform {
   }
 }
 
-public class MyScale implements Transform {
+public class MyScale implements Transform { // A new way of scaling from a regular octogon to the n64s octogon.
   private Coord outputCoord = new Coord();
 
   public Coord apply(Coord inputCoord) { //gc 105/73     n64 80/63 
@@ -201,7 +210,7 @@ public class MyScale implements Transform {
   }
 }
 
-public class NotchSnapping implements Transform {
+public class NotchSnapping implements Transform { // Snaps the coordinate to a point if it is within a certain range.
   private Coord outputCoord = new Coord();
   private int notch_Snap_Strength = 2;
   private CornerNotch gateArray[];
